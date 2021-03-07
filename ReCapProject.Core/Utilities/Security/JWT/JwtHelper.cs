@@ -12,24 +12,22 @@ using ReCapProject.Core.Utilities.Security.Encriyption;
 
 namespace ReCapProject.Core.Utilities.Security.JWT
 {
-    //// public IConfiguration Configuration { get; } // biizm apideki json dosyasındakileri okumamıza yarıyor
-    //private TokenOptions _tokenOptions;// okuduğumuz değerleri buraya atıcaz lakin bu nesneyi oluşturmadık
-    //private DateTime _accessTokenExpiration; // Access token ne zman geçerisileşecek
+    
     public class JwtHelper : ITokenHelper
     {
-        public IConfiguration Configuration { get; } // konfigürasyon dosyasını okuyacaz wep api dışında da kullanılır
-        private TokenOptions _tokenOptions;  // token option alanımız vardı json da
-        private DateTime _accessTokenExpiration; // acccesstoketn expritionu biz date time yazdık çünü zaman çevimrke lazım
+        public IConfiguration Configuration { get; } /
+        private TokenOptions _tokenOptions;  
+        private DateTime _accessTokenExpiration; 
         public JwtHelper(IConfiguration configuration)
         {
             Configuration = configuration;
-            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>(); // burda tokenoptionsları çekip nesneye aktardık keyi get içine aktardık
+            _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>(); 
 
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
-            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration); // yazmış olduğumuz 10 dk yı ekledik
-            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey); // oluşturulan tokenı encrypt ederken kendimzie ait anahtar lazım
+            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration); 
+            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
             var signingCredentials = SigningCredentialHelper.CreateSigningCredentials(securityKey);
             var jwt = CreateJwtSecurityToken(_tokenOptions, user, signingCredentials, operationClaims);
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
@@ -56,13 +54,13 @@ namespace ReCapProject.Core.Utilities.Security.JWT
             );
             return jwt;
         }
-        // olmayan bir şeye yeni methodlar ekleme extensions denir genişletmek yani
-        private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims) // jwt nin içinde yalnızca yetki olmuyor başka bilgiler de olabilir claim 
+        
+        private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims) 
         {
             var claims = new List<Claim>();
-            claims.AddNameIdentifier(user.Id.ToString()); // bunlar claims .net core da var içinde yok olduğu için Extensions oluşturdujk
+            claims.AddNameIdentifier(user.Id.ToString()); 
             claims.AddEmail(user.Email);
-            claims.AddName($"{user.FirstName} {user.LastName}"); // hoş geldin engin demiroğ gibi 
+            claims.AddName($"{user.FirstName} {user.LastName}"); 
             claims.AddRoles(operationClaims.Select(c => c.Name).ToArray());
 
             return claims;

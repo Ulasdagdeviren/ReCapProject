@@ -40,13 +40,13 @@ namespace ReCapProject.Business.Concrete.Managers
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userForLoginDto.Email); // maile bağlı kontrol
+            var userToCheck = _userService.GetByMail(userForLoginDto.Email); 
             if (userToCheck == null)
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
             }
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt)) //daha önceonun için oluşturulan sal ile veri tabanı ile yapılan hash aynı mı
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt)) 
             {
                 return new ErrorDataResult<User>(Messages.PasswordError);
             }

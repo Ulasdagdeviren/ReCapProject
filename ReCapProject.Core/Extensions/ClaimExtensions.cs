@@ -7,11 +7,11 @@ using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace ReCapProject.Core.Extensions
 {
-    public static class ClaimExtensions // bir extensions class yazmamız için method ve class static olmalı bu classı genişletmek demek
+    public static class ClaimExtensions 
     {
-        public static void AddEmail(this ICollection<Claim> claims, string email) // claimin içinde addEmaili görmek istioyurz
+        public static void AddEmail(this ICollection<Claim> claims, string email) 
         {
-            claims.Add(new Claim(JwtRegisteredClaimNames.Email, email)); // bunu email kısmına kaydet demek
+            claims.Add(new Claim(JwtRegisteredClaimNames.Email, email)); 
         }
 
         public static void AddName(this ICollection<Claim> claims, string name)

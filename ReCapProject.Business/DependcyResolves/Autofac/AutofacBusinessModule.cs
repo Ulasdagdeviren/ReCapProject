@@ -50,7 +50,7 @@ namespace ReCapProject.Business.DependcyResolves.Autofac
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
 
 
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly(); // burası Autofac üzerinden aspect yapmıştık validationı kullanmak için 26-31 arası
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly(); 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces().EnableInterfaceInterceptors(
                 new ProxyGenerationOptions()
                 {

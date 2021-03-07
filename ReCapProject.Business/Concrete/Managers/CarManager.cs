@@ -22,7 +22,7 @@ namespace ReCapProject.Business.Concrete.Managers
     public class CarManager : ICarService 
     {
         private ICarDal _carDal;
-        //private ICarImageService _service; // mikroservis inşa ediyoruz
+        //private ICarImageService _service; 
 
         public CarManager(ICarDal carDal)
         {

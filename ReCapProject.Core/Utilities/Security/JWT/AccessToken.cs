@@ -4,10 +4,10 @@ using System.Text;
 
 namespace ReCapProject.Core.Utilities.Security.JWT
 {
-   public class AccessToken //Erişim anahtarı 
+   public class AccessToken 
     {
         public string Token { get; set; }
-        public DateTime Expiration { get; set; } // token şu zmanda biticek
+        public DateTime Expiration { get; set; } 
     
 
     }
