@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using Castle.DynamicProxy;
+using ReCapProject.Core.CrossCutingConcern.Logging.Log4Net.Loggers;
+
+namespace ReCapProject.Core.Utilities.Interceptors
+{
+    public class AspectInterceptorSelector : IInterceptorSelector   
+    {
+        public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
+        {
+            var classAttribute = type.GetCustomAttributes<MethodInterceptionBaseAttribute>
+                (true).ToList();
+
+            var methodAttributes = type.GetMethod(method.Name).
+                GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
+
+            classAttribute.AddRange(methodAttributes);
+
+           // classAttribute.Add(new ExceptionLogAspect(typeof(FileLogger)));// bu sistemdeki tüm methodları logla demek
+            return classAttribute.OrderBy(x => x.Priority).ToArray();
+        }
+    }
+}
