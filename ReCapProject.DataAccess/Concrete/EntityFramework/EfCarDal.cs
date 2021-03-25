@@ -12,6 +12,6 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
 {
    public class EfCarDal:EfRepositoryBase<Car,CarContext>,ICarDal
     {
-     
+        
     }
 }

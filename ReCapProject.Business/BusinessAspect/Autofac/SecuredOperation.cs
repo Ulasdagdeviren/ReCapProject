@@ -14,7 +14,7 @@ namespace ReCapProject.Business.BusinessAspect.Autofac
     public class SecuredOperation : MethodInterception
     {
         private string[] _roles;
-        private IHttpContextAccessor _httpContextAccessor; // JWT için
+        private IHttpContextAccessor _httpContextAccessor; // JWT için her cliente tekil bir context nesnesi üretir
 
         public SecuredOperation(string roles)
         {

@@ -33,16 +33,10 @@ namespace ReCapProject.WebApii.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add()
+        public IActionResult Add(Car car)
         {
-        var  result = _service.Add(new Car
-            {
-                ColorId = 2,
-                BrandId = 1,
-                DailyPrice = 50,
-                Description = "Aracımız kullanıma hazır",
-                ModelYear = 1985
-            });
+            var result = _service.Add(car);
+            
           if (result.Success)
           {
               return Ok(result);

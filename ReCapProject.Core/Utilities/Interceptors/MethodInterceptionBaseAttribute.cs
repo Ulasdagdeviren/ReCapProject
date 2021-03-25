@@ -5,11 +5,11 @@ using Castle.DynamicProxy;
 
 namespace ReCapProject.Core.Utilities.Interceptors
 {
-    // AOP desteğini sağlayacak alt yapı Autofac ve Proxy den geliyor
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)] // classlara veya methodlara ekleyebilirsin bu etribütü ,birden fazla ekleyebilirsin
+    
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)] 
     public abstract class MethodInterceptionBaseAttribute : Attribute, IInterceptor
     {
-        public int Priority { get; set; } // öncelik değeri demek   
+        public int Priority { get; set; } 
 
         public virtual void Intercept(IInvocation invocation)
         {

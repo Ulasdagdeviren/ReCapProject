@@ -41,7 +41,6 @@ namespace ReCapProject.WebApii
             services.AddControllers();
             //services.AddSingleton<ICarService, CarManager>();// eðer bir baðýmlýlýk görürsen ICarService onun karþýlýðý CarManager dýr
             //services.AddSingleton<ICarDal, EfCarDal>();
-
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // Jwt beader install
@@ -49,12 +48,12 @@ namespace ReCapProject.WebApii
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
+                        ValidateIssuer = true, 
                         ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidIssuer = tokenOptions.Issuer,
+                        ValidateLifetime = true,// tokenýn yaþam ömrünü kontrol edeyim mi token olsa yeter mibiz 10 dk dedik
+                        ValidIssuer = tokenOptions.Issuer, // e mail 
                         ValidAudience = tokenOptions.Audience,
-                        ValidateIssuerSigningKey = true,
+                        ValidateIssuerSigningKey = true, // anahtarý kontrol edeyim mi
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
@@ -76,8 +75,8 @@ namespace ReCapProject.WebApii
 
             app.UseRouting();
 
-            app.UseAuthentication(); // biz yazdýk middler lear hangi yapýlar sýrasýyla girecek sýrayla
-            app.UseAuthorization();
+            app.UseAuthentication(); // biz yazdýk middler lear hangi yapýlar sýrasýyla girecek sýrayla eve girmek için anahtar
+            app.UseAuthorization();// istemediðimiz yerlere girmez 
 
             app.UseEndpoints(endpoints =>
             {

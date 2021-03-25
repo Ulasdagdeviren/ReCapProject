@@ -10,8 +10,7 @@ namespace ReCapProject.Business.ValidationRules.FluentValidation
     {
         public CarValidator()
         {
-            RuleFor(x => x.ModelYear).GreaterThan(2010);
-            RuleFor(x => x.DailyPrice).GreaterThan(80);
+
         }
     }
 }

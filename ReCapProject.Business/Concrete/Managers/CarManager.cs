@@ -46,8 +46,8 @@ namespace ReCapProject.Business.Concrete.Managers
         {
             return new SuccessDataResult<Car>(_carDal.Get(p => p.Id == id));
         }
-        [Core.Aspect.Autofac.Validation.ValidationAspect(typeof(CarValidator))]
-        [SecuredOperation("product.add,admin")]
+        [ValidationAspect(typeof(CarValidator))]
+        [SecuredOperation("product.add,Editor,student,teacher")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);

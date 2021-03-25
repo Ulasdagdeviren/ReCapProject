@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ReCapProject.Core.Utilities.IoC
 {
-    public class ServiceTool // Aspectlerde Servis sağlayııcı oluşturduk
+    public class ServiceTool 
     {
-        public static IServiceProvider ServiceProvider { get; private set; } // servis sağlayıcı demek ServiceProvider 
+        public static IServiceProvider ServiceProvider { get; private set; } 
 
-        public static IServiceCollection Create(IServiceCollection services) // biz form kullansak nasl injection yapcaktık bu sayede her yerde ınjectiion yapılır
+        public static IServiceCollection Create(IServiceCollection services)
         {
             ServiceProvider = services.BuildServiceProvider();
             return services;

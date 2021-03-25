@@ -8,7 +8,7 @@ using ReCapProject.Core.CrossCutingConcern.Logging.Log4Net.Loggers;
 
 namespace ReCapProject.Core.Utilities.Interceptors
 {
-    public class AspectInterceptorSelector : IInterceptorSelector   
+    public class AspectInterceptorSelector : IInterceptorSelector    
     {
         public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
         {
@@ -20,7 +20,7 @@ namespace ReCapProject.Core.Utilities.Interceptors
 
             classAttribute.AddRange(methodAttributes);
 
-           // classAttribute.Add(new ExceptionLogAspect(typeof(FileLogger)));// bu sistemdeki tüm methodları logla demek
+           
             return classAttribute.OrderBy(x => x.Priority).ToArray();
         }
     }

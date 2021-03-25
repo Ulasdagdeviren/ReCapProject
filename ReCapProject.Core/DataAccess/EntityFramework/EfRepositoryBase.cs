@@ -24,7 +24,7 @@ namespace ReCapProject.Core.DataAccess.EntityFramework
         {
             using (TContext context=new TContext())
             {
-                return context.Set<Tentity>().SingleOrDefault(filter); // Single Or Default=tek veya varsayılan
+                return context.Set<Tentity>().SingleOrDefault(filter); 
             }
         }
 
